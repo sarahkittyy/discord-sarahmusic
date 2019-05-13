@@ -15,6 +15,15 @@ const spotify = new Spotify();
 
 //On login.
 bot.on('ready', ()=>{
+	bot.user.setPresence({
+		game: {
+			name: '.fm to do the musics! o/w/o',
+			type: 'PLAYING',
+			url: 'owo.com'
+		},
+		afk: false,
+		status: 'online'
+	});
 	console.log(`Logged in as ${bot.user.username}!`);
 });
 

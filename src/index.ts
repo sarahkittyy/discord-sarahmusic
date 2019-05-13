@@ -1,10 +1,17 @@
 import * as Discord from 'discord.js';
 import * as fs from 'fs';
 
+import Spotify from './Spotify';
+import beautify from './beautify';
+import { isNullOrUndefined } from 'util';
+
 //Create the bot.
 const bot: Discord.Client = new Discord.Client({
 	//Options here..	
 });
+
+//Create the spotify bot.
+const spotify = new Spotify();
 
 //On login.
 bot.on('ready', ()=>{
@@ -12,7 +19,28 @@ bot.on('ready', ()=>{
 });
 
 bot.on('message', (message: Discord.Message)=>{
-	
+	//Ignore messages from this bot.
+	if(message.author.id === bot.user.id)
+	{
+		return;
+	}
+	if(message.content === '.fm')
+	{
+		//Get the discord presence
+		let presence: Discord.Presence = message.author.presence;
+		if(!presence.game || presence.game.name.toLowerCase() !== 'spotify') //Inform the user if it's not a spotify listen.
+		{
+			message.channel.send(beautify('i\'m p sure ur nyot doin a listen to anything rn ;w;'));
+			return;
+		}
+		
+		let songname: string = presence.game.details;
+		let author: string = presence.game.state;
+		
+		spotify.grabSong(songname, author, message).then((msg: Discord.RichEmbed)=>{
+			message.channel.send(msg);
+		});
+	}
 });
 
 bot.on('disconnect', ()=>{

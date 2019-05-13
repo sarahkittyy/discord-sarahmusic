@@ -5,7 +5,7 @@
   "author": "Sarah",
   "license": "MIT",
   "scripts": {
-	  "run": "gulp build && node dist/index.js"
+	  "start": "gulp build && node dist/index.js"
   },
   "dependencies": {
     "@types/node": "^12.0.1",

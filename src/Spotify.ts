@@ -42,7 +42,7 @@ export default class Spotify
 		
 		let item: any;
 		console.log(`Searching for '${name}' by '${author}'...\n`);
-		await this.bot.searchTracks(`track:${name} artist:${author}`).then((data: any)=>{
+		await this.bot.searchTracks(`track:"${name}" artist:"${author}"`).then((data: any)=>{
 			item = data.body.tracks.items[0];
 		}, (err: any)=>{
 			console.log(`grabSongs() error: ${err}`);

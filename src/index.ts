@@ -17,7 +17,7 @@ const spotify = new Spotify();
 bot.on('ready', ()=>{
 	bot.user.setPresence({
 		game: {
-			name: '.fm to do the musics! o/w/o',
+			name: '.np to do the musics! o/w/o',
 			type: 'PLAYING',
 			url: 'owo.com'
 		},
@@ -33,7 +33,7 @@ bot.on('message', (message: Discord.Message)=>{
 	{
 		return;
 	}
-	if(message.content === '.fm')
+	if(message.content === '.np')
 	{
 		//Get the discord presence
 		let presence: Discord.Presence = message.author.presence;

@@ -40,6 +40,8 @@ export default class Spotify
 			author = `\\${author}`;
 		}
 		
+		author = author.split(';')[0];
+		
 		let item: any;
 		console.log(`Searching for '${name}' by '${author}'...\n`);
 		await this.bot.searchTracks(`track:"${name}" artist:"${author}"`).then((data: any)=>{

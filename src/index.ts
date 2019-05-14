@@ -33,6 +33,14 @@ bot.on('message', (message: Discord.Message)=>{
 	{
 		return;
 	}
+	
+	if(message.content === '.meow')
+	{
+		spotify.grabSong('meow', 'or3o', message).then((msg: Discord.RichEmbed)=>{
+			message.channel.send(msg);
+		});
+	}
+	
 	if(message.content === '.np')
 	{
 		//Get the discord presence
@@ -42,6 +50,8 @@ bot.on('message', (message: Discord.Message)=>{
 			message.channel.send(beautify('i\'m p sure ur nyot doin a listen to anything rn ;w;'));
 			return;
 		}
+		
+		console.log(presence.game);
 		
 		let songname: string = presence.game.details;
 		let author: string = presence.game.state;

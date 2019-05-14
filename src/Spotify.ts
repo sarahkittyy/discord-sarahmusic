@@ -46,6 +46,14 @@ export default class Spotify
 			item = data.body.tracks.items[0];
 		}, (err: any)=>{
 			console.log(`grabSongs() error: ${err}`);
+			//Try to relog (my hacky catch-all solution)
+			console.log(`Reconnecting!~<3`);
+			this.bot.clientCredentialsGrant().then((data: any) => {
+				this.bot.setAccessToken(data.body.access_token);
+				console.log('Spotify Bot reconnected!');
+			}).catch((err: any)=>{
+				console.log(`Spotify reconnection error: ${err}`);
+			});
 		});
 		
 		if(isNullOrUndefined(item))
